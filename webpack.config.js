@@ -10,6 +10,7 @@ var getHtmlConfig = function(name, title){
     return {
         template    : './src/view/' + name + '.html',
         filename    : 'view/' + name + '.html',
+        favicon     :  './favicon.ico',
         title       : title,
         inject      : true,
         hash        : true,
@@ -27,6 +28,7 @@ var config = {
             'order-confirm'     :['./src/page/order-confirm/index.js'],
             'order-list'        :['./src/page/order-list/index.js'],
             'order-detail'      :['./src/page/order-detail/index.js'],
+            'payment'           :['./src/page/payment/index.js'],
             'detail'            :['./src/page/detail/index.js'],
             'user-login'        :['./src/page/user-login/index.js'],
             'user-register'     :['./src/page/user-register/index.js'],
@@ -34,12 +36,13 @@ var config = {
             'user-center'       :['./src/page/user-center/index.js'],
             'user-center-update':['./src/page/user-center-update/index.js'],
             'user-pass-update'  :['./src/page/user-pass-update/index.js'],
-            'result'            :['./src/page/result/index.js']
+            'result'            :['./src/page/result/index.js'],
+            'about'             :['./src/page/about/index.js']
         },
     output: {
-        path: './dist',
-        publicPath:'/dist',
-        filename: 'js/[name].js'
+        path            : __dirname + '/dist/',
+        publicPath      : 'dev' === WEBPACK_ENV ? '//s.happymmall.com/letaotao-front/dist/' : '/dist/',
+        filename        : 'js/[name].js'
     },
     externals :
         {
@@ -49,7 +52,13 @@ var config = {
         loaders: [
             { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader","css-loader") },
             { test: /\.(gif|png|jpg|woff|svg|eot|ttf)\??.*$/, loader: 'url-loader?limit=100&name=resource/[name].[ext]' },
-            { test: /\.string$/, loader: 'html-loader'}
+            {   test: /\.string$/,
+                loader: 'html-loader',
+                query:{
+                minimize : true,
+                removeAttributeQuotes:false
+                }
+            }
         ]
     },
     resolve : {
@@ -78,6 +87,7 @@ var config = {
             new HtmlWebpackPlugin(getHtmlConfig('order-confirm','订单确认')),
             new HtmlWebpackPlugin(getHtmlConfig('order-list','订单列表')),
             new HtmlWebpackPlugin(getHtmlConfig('order-detail','订单详情')),
+            new HtmlWebpackPlugin(getHtmlConfig('payment','订单支付')),
             new HtmlWebpackPlugin(getHtmlConfig('cart','购物车')),
             new HtmlWebpackPlugin(getHtmlConfig('user-login','用户登录')),
             new HtmlWebpackPlugin(getHtmlConfig('user-register','用户注册')),
@@ -85,7 +95,8 @@ var config = {
             new HtmlWebpackPlugin(getHtmlConfig('user-center','个人中心')),
             new HtmlWebpackPlugin(getHtmlConfig('user-center-update','修改个人信息')),
             new HtmlWebpackPlugin(getHtmlConfig('user-pass-update','修改密码')),
-            new HtmlWebpackPlugin(getHtmlConfig('result','操作结果'))
+            new HtmlWebpackPlugin(getHtmlConfig('result','操作结果')),
+            new HtmlWebpackPlugin(getHtmlConfig('about','关于乐淘淘'))
         ]
 };
 

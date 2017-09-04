@@ -51,7 +51,7 @@ var page = {
     loadUserInfo:function () {
         var userHtml   ='';
         _user.getUserInfo(function (res) {
-            userHtml = _ltt.renderHtml(templateIndex,res);
+            userHtml = _ltt. Html(templateIndex,res);
             $('.panel-body').html(userHtml);
         },function (errMsg) {
             _ltt.errorTips(errMsg);

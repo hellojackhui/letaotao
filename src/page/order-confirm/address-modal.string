@@ -41,7 +41,6 @@
                         <input type="text" class="form-item" id="receiver-zip" placeholder="如：100000" value="{{data.receiverZip}}"/>
                     </div>
                     <div class="form-line">
-                    <input type="hide" value="{{data.id}}" id="receiver-id"/>
                         <a class="btn address-btn">保存收货地址</a>
                     </div>
                 </div>

@@ -6,7 +6,7 @@ require('./index.css');
 
 var _ltt        =require('util/ltt.js');
 var _user       =require('service/user-service.js');
-var _cart       =require('service/cart-service.js');
+
 //导航
 var nav= {
     init : function () {
